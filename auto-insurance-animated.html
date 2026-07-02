@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TPL Insurance — Auto Insurance</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { brand: {
+        orange:'#ec7726', peach:'#fbb78f', golden:'#faa61a',
+        ice:'#badbe5', teal:'#3f96b4', grey:'#63656a', darkgrey:'#4a4f55' } },
+      fontFamily: { sans:['Poppins','Segoe UI','Roboto','Arial','sans-serif'] }
+    } }
+  }
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{overflow-x:hidden}
+  .tag{text-transform:uppercase;letter-spacing:.06em}
+
+  /* animated hero gradient */
+  .hero-bg{
+    background:linear-gradient(120deg,#fff5ef,#ffe9db,#eef6f9,#e7f3f7);
+    background-size:300% 300%;
+    animation:gradientShift 14s ease infinite;
+  }
+  @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  /* blobs */
+  .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;animation:float 9s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-30px) translateX(20px)}}
+
+  /* floating chips */
+  .chip{animation:bob 5s ease-in-out infinite}
+  .chip:nth-child(2){animation-delay:.6s}
+  .chip:nth-child(3){animation-delay:1.2s}
+  .chip:nth-child(4){animation-delay:1.8s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+  /* orbit ring */
+  .orbit{animation:spin 26s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .orbit-rev{animation:spin 40s linear infinite reverse}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(38px);transition:all .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal[data-d="1"]{transition-delay:.1s}
+  .reveal[data-d="2"]{transition-delay:.2s}
+  .reveal[data-d="3"]{transition-delay:.3s}
+  .reveal[data-d="4"]{transition-delay:.4s}
+
+  /* tilt cards */
+  .tilt{transition:transform .25s ease, box-shadow .25s ease}
+  .tilt:hover{transform:translateY(-8px) rotateX(4deg) rotateY(-4deg);box-shadow:0 26px 50px rgba(236,119,38,.18)}
+
+  /* shine button */
+  .shine{position:relative;overflow:hidden}
+  .shine:after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);transition:left .6s}
+  .shine:hover:after{left:130%}
+
+  /* animated pixel motif */
+  .pixels span{display:block;width:12px;height:12px;border-radius:3px;animation:pop 2.4s ease-in-out infinite}
+  .pixels span:nth-child(odd){animation-delay:.4s}
+  .pixels span:nth-child(3n){animation-delay:.8s}
+  @keyframes pop{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.35);opacity:1}}
+
+  /* marquee */
+  .marquee{display:flex;gap:1.5rem;width:max-content;animation:scrollX 26s linear infinite}
+  .marquee:hover{animation-play-state:paused}
+  @keyframes scrollX{to{transform:translateX(-50%)}}
+
+  /* count underline */
+  .stat-num{background:linear-gradient(transparent 65%,rgba(255,255,255,.35) 0);}
+
+  /* progress bar */
+  #bar{position:fixed;top:0;left:0;height:3px;background:#ec7726;z-index:100;width:0}
+
+  /* nav shrink */
+  header.shrunk{box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  header.shrunk .navpad{padding-top:.6rem;padding-bottom:.6rem}
+
+  .faq-item .ans{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .faq-item.open .ans{max-height:220px}
+  .faq-item.open .ico{transform:rotate(45deg)}
+  .ico{transition:transform .3s ease;display:inline-block}
+</style>
+</head>
+<body class="font-sans text-brand-darkgrey bg-white">
+<div id="bar"></div>
+
+<!-- Top bar -->
+<div class="bg-neutral-900 text-neutral-200 text-[13px]">
+  <div class="max-w-7xl mx-auto px-6 py-2 flex justify-end items-center gap-4">
+    <a href="#" class="hidden sm:flex items-center gap-2 hover:text-brand-orange transition">&#9881; Customer Portal</a>
+    <span class="opacity-30 hidden sm:inline">|</span>
+    <a href="tel:02111000301" class="hover:text-brand-orange transition">(021) 111 000 301</a>
+    <span class="opacity-30">|</span>
+    <a href="#quote" class="bg-brand-orange text-white px-4 py-1.5 rounded-full font-semibold shine">Buy Insurance</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur transition-all">
+  <div class="navpad max-w-7xl mx-auto px-6 py-4 flex items-center justify-between transition-all">
+    <a href="https://tplinsurance.com"><img src="https://tplinsurance.com/storage/2023/07/TPL-insurance-logo-updatenew.webp" alt="TPL Insurance" class="h-9"></a>
+    <nav class="hidden lg:flex items-center gap-7 text-[15px] font-medium text-neutral-700">
+      <a href="#features" class="relative hover:text-brand-orange transition after:absolute after:left-0 after:-bottom-1 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-orange after:transition-all">Features</a>
+      <a href="#plans" class="relative hover:text-brand-orange transition after:absolute after:left-0 after:-bottom-1 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-orange after:transition-all">Plans</a>
+      <a href="#how" class="relative hover:text-brand-orange transition after:absolute after:left-0 after:-bottom-1 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-orange after:transition-all">How it works</a>
+      <a href="#faq" class="relative hover:text-brand-orange transition after:absolute after:left-0 after:-bottom-1 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-orange after:transition-all">FAQ</a>
+    </nav>
+    <a href="#quote" class="bg-brand-orange hover:bg-[#d9651c] text-white px-5 py-2.5 rounded-full font-semibold text-sm shine">Get a Quote</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-bg relative">
+  <div class="blob bg-brand-orange/40 w-72 h-72 top-10 -left-10"></div>
+  <div class="blob bg-brand-teal/30 w-80 h-80 bottom-0 right-0" style="animation-delay:2s"></div>
+  <div class="blob bg-brand-golden/30 w-56 h-56 top-1/2 left-1/3" style="animation-delay:4s"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-2 gap-12 items-center">
+    <!-- copy -->
+    <div class="reveal in">
+      <span class="tag inline-flex items-center gap-2 bg-white/70 backdrop-blur text-brand-orange text-xs font-bold px-4 py-1.5 rounded-full mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-brand-orange animate-ping"></span> Auto insurance
+      </span>
+      <h1 class="text-5xl md:text-6xl font-extrabold uppercase leading-[1.05] mb-6">
+        <span class="text-neutral-900">Drive</span>
+        <span class="text-brand-orange">Fully</span><br>
+        <span class="text-neutral-900">Protected</span>
+        <span id="type" class="text-brand-teal"></span><span class="inline-block w-1 h-10 bg-brand-orange align-middle animate-pulse"></span>
+      </h1>
+      <p class="text-brand-grey text-lg max-w-lg mb-8">Cutting-edge technology, instant digital claims, and 24&times;7 support — protecting 400,000+ vehicles across Pakistan since 2005.</p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="#quote" class="shine bg-brand-orange hover:bg-[#d9651c] text-white px-8 py-3.5 rounded-full font-semibold shadow-lg shadow-brand-orange/30 hover:scale-105 transition">Get Your Quote</a>
+        <a href="#plans" class="group border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white px-8 py-3.5 rounded-full font-semibold transition flex items-center gap-2">
+          Compare Plans <span class="group-hover:translate-x-1 transition">&rarr;</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-brand-grey">
+        <div class="flex items-center gap-2"><span class="text-brand-golden">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8/5</div>
+        <div>Terms &amp; Conditions Apply *</div>
+      </div>
+    </div>
+
+    <!-- visual: orbit + chips + quote peek -->
+    <div class="relative h-[460px] reveal in" data-d="2">
+      <!-- orbit rings -->
+      <div class="orbit absolute inset-0 m-auto w-[360px] h-[360px] rounded-full border-2 border-dashed border-brand-orange/40"></div>
+      <div class="orbit-rev absolute inset-0 m-auto w-[250px] h-[250px] rounded-full border border-dashed border-brand-teal/40"></div>
+
+      <!-- center card -->
+      <div class="absolute inset-0 m-auto w-56 h-56 bg-white rounded-3xl shadow-2xl flex flex-col items-center justify-center text-center p-5">
+        <div class="text-5xl mb-2">&#128663;</div>
+        <div class="text-brand-orange font-extrabold text-xl uppercase">Auto</div>
+        <div class="text-xs text-brand-grey mt-1">Comprehensive cover from PKR 12k/yr*</div>
+      </div>
+
+      <!-- floating chips -->
+      <div class="chip absolute top-4 left-8 bg-white rounded-2xl shadow-xl w-20 h-20 flex flex-col items-center justify-center">
+        <span class="text-2xl">&#128737;</span><span class="text-[10px] font-semibold mt-1">Total Loss</span></div>
+      <div class="chip absolute top-10 right-4 bg-white rounded-2xl shadow-xl w-20 h-20 flex flex-col items-center justify-center">
+        <span class="text-2xl">&#128176;</span><span class="text-[10px] font-semibold mt-1">Zero Dep.</span></div>
+      <div class="chip absolute bottom-10 left-2 bg-white rounded-2xl shadow-xl w-20 h-20 flex flex-col items-center justify-center">
+        <span class="text-2xl">&#128241;</span><span class="text-[10px] font-semibold mt-1">Tracker</span></div>
+      <div class="chip absolute bottom-4 right-10 bg-white rounded-2xl shadow-xl w-20 h-20 flex flex-col items-center justify-center">
+        <span class="text-2xl">&#9889;</span><span class="text-[10px] font-semibold mt-1">Fast Claims</span></div>
+    </div>
+  </div>
+
+  <!-- animated pixel motif -->
+  <div class="pixels absolute bottom-6 left-6 grid grid-cols-3 gap-1.5 opacity-80">
+    <span class="bg-brand-orange"></span><span class="bg-brand-golden"></span><span class="bg-brand-ice"></span>
+    <span class="bg-brand-peach"></span><span class="bg-brand-orange"></span><span class="bg-brand-teal"></span>
+    <span class="bg-brand-golden"></span><span class="bg-brand-teal"></span><span class="bg-brand-orange"></span>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="bg-brand-orange text-white">
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div class="reveal"><div class="stat-num text-4xl md:text-5xl font-extrabold" data-count="400000" data-suffix="+">0</div><div class="text-sm opacity-95 mt-1">Customers Served</div></div>
+    <div class="reveal" data-d="1"><div class="stat-num text-4xl md:text-5xl font-extrabold" data-count="98" data-suffix="%">0</div><div class="text-sm opacity-95 mt-1">Claims Settled</div></div>
+    <div class="reveal" data-d="2"><div class="stat-num text-4xl md:text-5xl font-extrabold" data-count="24" data-suffix="/7">0</div><div class="text-sm opacity-95 mt-1">Support</div></div>
+    <div class="reveal" data-d="3"><div class="stat-num text-4xl md:text-5xl font-extrabold" data-count="20" data-suffix="+ yrs">0</div><div class="text-sm opacity-95 mt-1">Trusted Since 2005</div></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <h2 class="text-4xl font-extrabold uppercase text-brand-orange mb-3">Key Features</h2>
+      <p class="text-brand-grey">Next-gen technology and round-the-clock service, wherever the road takes you.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" style="perspective:1000px">
+      <div class="tilt reveal bg-white border border-neutral-100 rounded-2xl p-8 text-center shadow-sm">
+        <div class="w-24 h-24 mx-auto mb-5 rounded-full border-2 border-brand-orange flex items-center justify-center text-4xl">&#128737;</div>
+        <h4 class="text-lg font-bold text-brand-orange mb-2 uppercase">Comprehensive</h4>
+        <p class="text-sm text-brand-grey">Coverage from minor damages to total loss situations.</p>
+      </div>
+      <div class="tilt reveal" data-d="1"><div class="bg-white border border-neutral-100 rounded-2xl p-8 text-center shadow-sm h-full">
+        <div class="w-24 h-24 mx-auto mb-5 rounded-full border-2 border-brand-orange flex items-center justify-center text-4xl">&#128176;</div>
+        <h4 class="text-lg font-bold text-brand-orange mb-2 uppercase">Zero Depreciation</h4>
+        <p class="text-sm text-brand-grey">Full value on replaced parts — no depreciation deducted.</p></div>
+      </div>
+      <div class="tilt reveal" data-d="2"><div class="bg-white border border-neutral-100 rounded-2xl p-8 text-center shadow-sm h-full">
+        <div class="w-24 h-24 mx-auto mb-5 rounded-full border-2 border-brand-orange flex items-center justify-center text-4xl">&#128663;</div>
+        <h4 class="text-lg font-bold text-brand-orange mb-2 uppercase">Instant Tracker</h4>
+        <p class="text-sm text-brand-grey">Real-time tracking, theft recovery, and added security.</p></div>
+      </div>
+      <div class="tilt reveal"><div class="bg-white border border-neutral-100 rounded-2xl p-8 text-center shadow-sm h-full">
+        <div class="w-24 h-24 mx-auto mb-5 rounded-full border-2 border-brand-orange flex items-center justify-center text-4xl">&#128241;</div>
+        <h4 class="text-lg font-bold text-brand-orange mb-2 uppercase">DrivePro</h4>
+        <p class="text-sm text-brand-grey">Telematics cover that rewards safe driving.</p></div>
+      </div>
+      <div class="tilt reveal" data-d="1"><div class="bg-white border border-neutral-100 rounded-2xl p-8 text-center shadow-sm h-full">
+        <div class="w-24 h-24 mx-auto mb-5 rounded-full border-2 border-brand-orange flex items-center justify-center text-4xl">&#127959;</div>
+        <h4 class="text-lg font-bold text-brand-orange mb-2 uppercase">Total Loss Cover</h4>
+        <p class="text-sm text-brand-grey">Protection against theft, accident, fire and terrorism.</p></div>
+      </div>
+      <div class="tilt reveal" data-d="2"><div class="bg-white border border-neutral-100 rounded-2xl p-8 text-center shadow-sm h-full">
+        <div class="w-24 h-24 mx-auto mb-5 rounded-full border-2 border-brand-orange flex items-center justify-center text-4xl">&#9889;</div>
+        <h4 class="text-lg font-bold text-brand-orange mb-2 uppercase">Fast Digital Claims</h4>
+        <p class="text-sm text-brand-grey">File and track claims in real time via the app.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plans / coverage -->
+<section id="plans" class="py-24 bg-brand-ice/20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+      <h2 class="text-4xl font-extrabold uppercase text-brand-orange mb-3">Compare Plans</h2>
+      <p class="text-brand-grey">Choose the auto cover that fits your drive.</p>
+    </div>
+    <div class="overflow-x-auto bg-white rounded-2xl shadow-lg reveal">
+      <table class="w-full min-w-[720px] text-sm">
+        <thead>
+          <tr class="border-b border-neutral-100 bg-neutral-50">
+            <th class="text-left pl-7 py-5 font-bold">Features</th>
+            <th class="py-5 font-bold">Comprehensive</th>
+            <th class="py-5 font-bold">Platinum</th>
+            <th class="py-5 font-bold">Zero Dep.</th>
+            <th class="py-5 font-bold">DrivePro</th>
+            <th class="py-5 font-bold">Secure T</th>
+          </tr>
+        </thead>
+        <tbody id="cov"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section id="how" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <h2 class="text-4xl font-extrabold uppercase text-brand-orange mb-3">How It Works</h2>
+      <p class="text-brand-grey">Get insured in minutes — completely online.</p>
+    </div>
+    <div class="grid md:grid-cols-4 gap-8 relative">
+      <div class="hidden md:block absolute top-7 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-brand-orange/20 via-brand-orange to-brand-orange/20"></div>
+      <div class="reveal text-center relative"><div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-orange text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-brand-orange/30 relative z-10">1</div><h4 class="font-semibold mb-2">Get a Quote</h4><p class="text-sm text-brand-grey">Enter your vehicle details and pick a plan.</p></div>
+      <div class="reveal text-center relative" data-d="1"><div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-orange text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-brand-orange/30 relative z-10">2</div><h4 class="font-semibold mb-2">Customize Cover</h4><p class="text-sm text-brand-grey">Add tracker, zero depreciation or telematics.</p></div>
+      <div class="reveal text-center relative" data-d="2"><div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-orange text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-brand-orange/30 relative z-10">3</div><h4 class="font-semibold mb-2">Pay Securely</h4><p class="text-sm text-brand-grey">Complete secure online payment in a few clicks.</p></div>
+      <div class="reveal text-center relative" data-d="3"><div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-orange text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-brand-orange/30 relative z-10">4</div><h4 class="font-semibold mb-2">Drive Protected</h4><p class="text-sm text-brand-grey">Policy issued instantly — manage it in the app.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote CTA with form -->
+<section id="quote" class="py-24 bg-gradient-to-br from-brand-teal to-[#1d3d46] text-white relative overflow-hidden">
+  <div class="blob bg-brand-orange/30 w-72 h-72 -top-10 right-10"></div>
+  <div class="max-w-5xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative">
+    <div class="reveal">
+      <h2 class="text-4xl font-extrabold uppercase mb-4">Get your vehicle insured now</h2>
+      <p class="opacity-90 mb-6">Protect your vehicle with TPL Insurance — Pakistan's trusted auto insurance provider since 2005. Instant online policy, zero paperwork.</p>
+      <ul class="space-y-2 text-sm opacity-95">
+        <li>&#10003; Instant digital policy issuance</li>
+        <li>&#10003; 24/7 claims &amp; roadside assistance</li>
+        <li>&#10003; Rewards for safe driving</li>
+      </ul>
+    </div>
+    <div class="reveal bg-white rounded-2xl shadow-2xl p-7 text-brand-darkgrey" data-d="1">
+      <h3 class="text-center text-xl font-bold">Get Your Quote</h3>
+      <p class="text-center text-brand-orange font-semibold text-xs uppercase tracking-wide mb-5">Auto insurance</p>
+      <form onsubmit="handleQuote(event)" class="space-y-3">
+        <input required type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border border-brand-peach focus:border-brand-orange outline-none text-sm">
+        <input required type="tel" placeholder="Your Phone" class="w-full px-4 py-3 rounded-lg border border-brand-peach focus:border-brand-orange outline-none text-sm">
+        <input required type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border border-brand-peach focus:border-brand-orange outline-none text-sm">
+        <select class="w-full px-4 py-3 rounded-lg border border-brand-peach focus:border-brand-orange outline-none text-sm text-brand-grey">
+          <option>Plan — Comprehensive</option><option>Plan — Platinum</option><option>Plan — Zero Depreciation</option><option>Plan — DrivePro</option><option>Plan — Secure T</option>
+        </select>
+        <button type="submit" class="shine w-full bg-brand-orange hover:bg-[#d9651c] text-white py-3 rounded-full font-semibold">Get Instant Quote</button>
+        <p id="quoteMsg" class="text-center text-sm text-brand-teal font-semibold hidden">&#10003; Thanks! Our team will call you shortly.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials marquee -->
+<section class="py-24 overflow-hidden">
+  <div class="text-center max-w-2xl mx-auto mb-14 px-6 reveal">
+    <h2 class="text-4xl font-extrabold uppercase text-brand-orange mb-3">What Drivers Say</h2>
+    <p class="text-brand-grey">Trusted by hundreds of thousands of vehicle owners.</p>
+  </div>
+  <div class="relative">
+    <div class="marquee px-3" id="marquee"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 bg-brand-ice/20">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <h2 class="text-4xl font-extrabold uppercase text-brand-orange mb-3">FAQs</h2>
+      <p class="text-brand-grey">Answers to common auto insurance questions.</p>
+    </div>
+    <div id="faqList" class="space-y-3"></div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="py-16">
+  <div class="max-w-3xl mx-auto px-6 text-center reveal">
+    <h2 class="text-2xl md:text-3xl font-extrabold uppercase mb-6">Subscribe for <span class="text-brand-orange">more updates</span></h2>
+    <form onsubmit="return false" class="flex max-w-lg mx-auto">
+      <input type="email" placeholder="Enter your email" class="flex-1 px-5 py-3.5 rounded-l-full border border-neutral-200 border-r-0 outline-none focus:border-brand-orange">
+      <button class="shine bg-brand-orange hover:bg-[#d9651c] text-white px-8 py-3.5 rounded-r-full font-semibold">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-neutral-900 text-neutral-300 text-sm">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
+    <div>
+      <img src="https://tplinsurance.com/storage/2023/07/TPL-insurance-logo-updatenew.webp" alt="TPL Insurance" class="h-8 mb-5 brightness-0 invert">
+      <p class="leading-relaxed">TPL Insurance is the first insurance company in Pakistan to sell general insurance directly to consumers. Trusted since 2005.</p>
+      <div class="flex gap-2.5 mt-5">
+        <a href="#" class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center hover:scale-110 transition">f</a>
+        <a href="#" class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center hover:scale-110 transition">X</a>
+        <a href="#" class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center hover:scale-110 transition">&#9673;</a>
+        <a href="#" class="w-8 h-8 rounded-full bg-brand-orange text-white flex items-center justify-center hover:scale-110 transition">in</a>
+      </div>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold mb-4">Quick Links</h5>
+      <ul class="space-y-2.5">
+        <li><a href="#" class="hover:text-brand-orange">Product Brochures</a></li>
+        <li><a href="#" class="hover:text-brand-orange">Group of Companies</a></li>
+        <li><a href="#" class="hover:text-brand-orange">Panel Hospitals</a></li>
+        <li><a href="#" class="hover:text-brand-orange">Complaint Forums</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold mb-4">Locations</h5>
+      <ul class="space-y-2.5"><li>&#128205; Lahore</li><li>&#128205; Multan</li><li>&#128205; Faisalabad</li><li>&#128205; Hyderabad</li></ul>
+    </div>
+    <!-- Brand CTA block -->
+    <div class="bg-white/5 rounded-xl p-5">
+      <h5 class="text-white font-semibold mb-4">Get the App</h5>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://tplinsurance.com/my-tpli/" alt="QR" class="w-24 h-24 bg-white p-1.5 rounded-lg mb-4">
+      <div class="flex flex-col gap-2 mb-4">
+        <a href="#" class="bg-black rounded-md px-3 py-1.5 flex flex-col leading-tight text-xs"><span class="text-[8px] uppercase opacity-70">Download on the</span><span class="font-bold">App Store</span></a>
+        <a href="#" class="bg-black rounded-md px-3 py-1.5 flex flex-col leading-tight text-xs"><span class="text-[8px] uppercase opacity-70">Get it on</span><span class="font-bold">Google Play</span></a>
+        <a href="#" class="bg-black rounded-md px-3 py-1.5 flex flex-col leading-tight text-xs"><span class="text-[8px] uppercase opacity-70">Explore it on</span><span class="font-bold">AppGallery</span></a>
+      </div>
+      <div class="text-xs space-y-1">
+        <div>UAN: <span class="text-white">(021) 111 000 301</span></div>
+        <div>Web: <a href="https://tplinsurance.com" class="text-brand-orange">tplinsurance.com</a></div>
+        <div>WhatsApp: <span class="text-white">+92 21 111 000 301</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-neutral-800">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-neutral-400">
+      <span class="bg-white text-[#1c3f8f] font-bold px-3 py-1.5 rounded">Jama Punji</span>
+      <div class="space-x-5"><a href="#" class="hover:text-brand-orange">Privacy Policy</a><a href="#" class="hover:text-brand-orange">Quality Policy</a><a href="#" class="hover:text-brand-orange">Sitemap</a></div>
+      <span>&copy; TPL Insurance Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="fixed right-6 bottom-6 w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center text-2xl shadow-lg z-50 hover:scale-110 transition">&#9742;</a>
+<a href="#quote" id="toTop" class="fixed right-6 bottom-24 w-11 h-11 rounded-full bg-brand-orange text-white flex items-center justify-center shadow-lg z-50 opacity-0 pointer-events-none transition">&uarr;</a>
+
+<script>
+  /* scroll progress + nav shrink + back-to-top */
+  const bar=document.getElementById('bar'), header=document.querySelector('header'), toTop=document.getElementById('toTop');
+  addEventListener('scroll',()=>{
+    const h=document.documentElement, sc=h.scrollTop/(h.scrollHeight-h.clientHeight);
+    bar.style.width=(sc*100)+'%';
+    header.classList.toggle('shrunk', h.scrollTop>20);
+    toTop.style.opacity=h.scrollTop>600?'1':'0';
+    toTop.style.pointerEvents=h.scrollTop>600?'auto':'none';
+  });
+
+  /* reveal on scroll */
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* count-up stats */
+  const fmt=n=>n>=1000?Math.round(n).toLocaleString():Math.round(n);
+  const cio=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(!e.isIntersecting)return; cio.unobserve(e.target);
+    const el=e.target, end=+el.dataset.count, suf=el.dataset.suffix||''; let t0=null;
+    const step=t=>{t0=t0||t;const p=Math.min((t-t0)/1400,1);el.textContent=fmt(end*(0.5-Math.cos(p*Math.PI)/2))+suf;if(p<1)requestAnimationFrame(step);};
+    requestAnimationFrame(step);
+  }),{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+  /* typewriter */
+  const words=[' on the road',' from theft',' every mile',' 24/7'];let wi=0,ci=0,del=false;
+  const type=()=>{const el=document.getElementById('type');const w=words[wi];
+    el.textContent=w.substring(0,ci);
+    if(!del&&ci<w.length){ci++;}else if(del&&ci>0){ci--;}
+    else{del=!del;if(!del){wi=(wi+1)%words.length;}}
+    setTimeout(type,del?55:110);};
+  type();
+
+  /* coverage table */
+  const cov=[['Accident',1,1,1,1,0],['Theft / Snatch',1,1,1,1,1],['Third Party',1,1,1,1,1],['Tracker',0,1,0,1,0],['Total Loss',1,1,1,1,1],['Terrorism',1,1,1,1,1],['Telematics',0,1,0,1,0],['Zero Deductible',1,1,1,1,1],['Depreciation Waiver',0,1,1,1,0]];
+  const mk=v=>v?'<span class="text-brand-orange font-extrabold">&#10003;</span>':'<span class="text-neutral-300 font-extrabold">&#10007;</span>';
+  document.getElementById('cov').innerHTML=cov.map(r=>`<tr class="border-b border-neutral-100 hover:bg-brand-peach/10 transition"><td class="text-left pl-7 py-4 font-semibold">${r[0]}</td>${r.slice(1).map(v=>`<td class="py-4 text-center">${mk(v)}</td>`).join('')}</tr>`).join('');
+
+  /* testimonials marquee (duplicated for seamless loop) */
+  const revs=[['Ali Raza','Karachi','Claim settled faster than I expected — truly hassle-free.'],['Sana Khan','Lahore','The tracker gives me real peace of mind on every drive.'],['Bilal Ahmed','Islamabad','Bought online in 5 minutes and DrivePro rewards safe driving.'],['Hina Malik','Rawalpindi','Great support team and a genuinely easy claims process.'],['Usman Tariq','Faisalabad','Comprehensive plan covered everything after my accident.']];
+  const card=r=>`<div class="w-80 shrink-0 bg-white border border-neutral-100 rounded-2xl p-6 shadow-sm"><div class="text-brand-golden mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="text-sm text-brand-grey mb-4">"${r[2]}"</p><div class="font-semibold">${r[0]}</div><div class="text-xs text-brand-grey">${r[1]}</div></div>`;
+  document.getElementById('marquee').innerHTML=(revs.map(card).join(''))+(revs.map(card).join(''));
+
+  /* FAQ */
+  const faqs=[['What is a comprehensive auto policy?','It covers your vehicle from all aspects — accidental (external means), fire, riot and strike, atmospheric disturbance, earthquake, theft/snatch, and third-party liability.'],['What is a "without Trakker" policy?','Coverage without requiring a vehicle tracking device to be installed.'],['Can I change my policy start date?','Yes — contact customer support to update it before the policy becomes active.'],['What is a deductible / excess?','The amount you contribute towards a claim; applicability depends on your plan.'],['Can I add other drivers?','Yes, additional drivers can be added subject to underwriting terms.']];
+  document.getElementById('faqList').innerHTML=faqs.map((f,i)=>`<div class="faq-item bg-white rounded-xl border border-neutral-100 px-6 ${i===0?'open':''}"><button class="w-full flex justify-between items-center gap-4 py-5 text-left font-semibold">${f[0]}<span class="ico text-2xl text-brand-orange">+</span></button><div class="ans text-sm text-brand-grey"><p class="pb-5">${f[1]}</p></div></div>`).join('');
+  document.querySelectorAll('.faq-item button').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+
+  /* quote submit */
+  function handleQuote(e){e.preventDefault();document.getElementById('quoteMsg').classList.remove('hidden');e.target.reset();}
+</script>
+</body>
+</html>
