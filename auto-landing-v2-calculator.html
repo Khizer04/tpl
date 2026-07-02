@@ -314,6 +314,40 @@ tailwind.config = {
   </div>
 </section>
 
+<!-- ================= PREMIUM CALCULATOR ================= -->
+<section id="calc" class="py-24 px-6 lg:px-12 bg-white">
+  <div class="max-w-5xl mx-auto sr">
+    <div class="text-center mb-12">
+      <p class="text-brand text-xs tracking-[.3em] uppercase font-semibold">Instant estimate</p>
+      <h2 class="text-4xl font-extrabold uppercase text-dkgrey mt-3">Calculate your premium</h2>
+      <p class="text-grey text-sm mt-4">Slide to your car's market value and pick a plan &mdash; the estimate updates live.</p>
+    </div>
+    <div class="bg-[#faf7f4] rounded-3xl p-8 lg:p-12 grid lg:grid-cols-2 gap-10 border border-gray-100">
+      <div>
+        <label class="text-xs uppercase tracking-wider text-grey font-semibold">Vehicle value &mdash; <span id="valLabel" class="text-brand font-bold">PKR 3,000,000</span></label>
+        <input id="valRange" type="range" min="500000" max="20000000" step="100000" value="3000000" class="w-full mt-3" style="accent-color:#ec7726">
+        <div class="flex justify-between text-[11px] text-grey mt-1"><span>5 Lac</span><span>2 Crore</span></div>
+        <div class="mt-7 flex flex-wrap gap-2" id="rateBtns">
+          <button data-rate="0.0325" class="rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-brand bg-brand text-white transition">COMPREHENSIVE &middot; 3.25%</button>
+          <button data-rate="0.0375" class="rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-gray-200 text-grey hover:border-brand transition">PLATINUM &middot; 3.75%</button>
+          <button data-rate="0.0425" class="rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-gray-200 text-grey hover:border-brand transition">ZERO DEP &middot; 4.25%</button>
+        </div>
+        <p class="text-[11px] text-grey mt-5">* Illustrative estimate only. Final premium is confirmed after vehicle inspection.</p>
+      </div>
+      <div class="bg-gradient-to-br from-ink to-[#2b2e35] rounded-2xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden">
+        <div class="pixels absolute top-4 right-4 opacity-60">
+          <span style="background:#ec7726"></span><span></span><span style="background:#faa61a"></span><span></span><span></span><span style="background:#fbb78f"></span>
+        </div>
+        <p class="text-white/60 text-xs uppercase tracking-[.3em]">Estimated annual premium</p>
+        <p class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand to-golden my-5">PKR <span id="premium">97,500</span></p>
+        <p class="text-white/50 text-xs mb-7">&asymp; PKR <span id="monthly">8,125</span> / month</p>
+        <a href="#coverage" class="btn-brand btn-shine text-white font-semibold px-10 py-3.5 rounded-full text-sm w-full">PROCEED WITH THIS QUOTE</a>
+        <p class="text-white/40 text-[11px] mt-4">No obligation &middot; Free vehicle inspection</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= QUOTE / APP (text source: car-insurance-scraped.md §4 & §5) ================= -->
 <section id="quote" class="relative py-24 px-6 lg:px-12 bg-gradient-to-b from-ink to-[#26282e] text-white overflow-hidden">
   <div class="grid-lines"></div>
@@ -618,6 +652,29 @@ document.querySelectorAll('.tilt').forEach(card=>{
   });
   card.addEventListener('mouseleave',()=>card.style.transform='');
 });
+
+/* premium calculator (illustrative sample rates) */
+(function(){
+  const range=document.getElementById('valRange'), valLabel=document.getElementById('valLabel'),
+        premium=document.getElementById('premium'), monthly=document.getElementById('monthly');
+  if(!range) return;
+  let rate=0.0325;
+  const fmt=n=>n.toLocaleString('en-PK');
+  function calc(){
+    const v=+range.value;
+    valLabel.textContent='PKR '+fmt(v);
+    const p=Math.round(v*rate);
+    premium.textContent=fmt(p);
+    monthly.textContent=fmt(Math.round(p/12));
+  }
+  range.addEventListener('input',calc);
+  document.querySelectorAll('.rate-btn').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.rate-btn').forEach(x=>x.className='rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-gray-200 text-grey hover:border-brand transition');
+    b.className='rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-brand bg-brand text-white transition';
+    rate=+b.dataset.rate; calc();
+  }));
+  calc();
+})();
 </script>
 </body>
 </html>

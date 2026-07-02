@@ -48,11 +48,11 @@ tailwind.config = {
 
   /* ---------- hero ---------- */
   .hero-bg{ background:
-    radial-gradient(1000px 500px at 80% 10%, rgba(236,119,38,.28), transparent 60%),
-    radial-gradient(700px 420px at 10% 90%, rgba(63,150,180,.22), transparent 60%),
-    linear-gradient(160deg,#17181c 0%, #1c1e22 55%, #23262c 100%); }
+    radial-gradient(1000px 500px at 80% 10%, rgba(236,119,38,.16), transparent 60%),
+    radial-gradient(700px 420px at 10% 90%, rgba(63,150,180,.12), transparent 60%),
+    linear-gradient(160deg,#ffffff 0%, #faf7f4 55%, #eef1f4 100%); }
   .grid-lines{ position:absolute; inset:0; opacity:.07; pointer-events:none;
-    background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+    background-image:linear-gradient(#1c1e22 1px,transparent 1px),linear-gradient(90deg,#1c1e22 1px,transparent 1px);
     background-size:56px 56px; mask-image:radial-gradient(ellipse at 60% 40%, #000 30%, transparent 75%); }
 
   /* road stripes under car */
@@ -71,7 +71,7 @@ tailwind.config = {
 
   /* floating chips */
   .chip{ position:absolute; display:flex; align-items:center; gap:8px;
-    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+    background:rgba(28,30,34,.92); border:1px solid rgba(255,255,255,.12);
     backdrop-filter:blur(10px); border-radius:999px; padding:8px 16px;
     color:#fff; font-size:12px; font-weight:500; animation:floaty 5s ease-in-out infinite; }
   @keyframes floaty{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
@@ -157,7 +157,7 @@ tailwind.config = {
 
   /* nav */
   #nav{ transition:all .35s; }
-  #nav.scrolled{ background:rgba(23,24,28,.85); backdrop-filter:blur(14px); box-shadow:0 6px 24px rgba(0,0,0,.25); }
+  #nav.scrolled{ background:rgba(255,255,255,.92); backdrop-filter:blur(14px); box-shadow:0 6px 24px rgba(0,0,0,.08); }
   .navlink{ position:relative; }
   .navlink::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--brand); transition:width .3s; }
   .navlink:hover::after{ width:100%; }
@@ -195,7 +195,7 @@ tailwind.config = {
   <a href="#" class="flex items-center gap-3">
     <span class="bg-white rounded-md p-1.5"><img src="assets/tpl-logo.webp" onerror="this.onerror=null;this.src='https://tplinsurance.com/storage/2023/07/TPL-insurance-logo-updatenew.webp'" alt="TPL Insurance" class="h-8 w-auto"></span>
   </a>
-  <div class="hidden md:flex items-center gap-7 text-sm text-white/85 font-medium">
+  <div class="hidden md:flex items-center gap-7 text-sm text-neutral-700 font-medium">
     <a class="navlink" href="#">ABOUT TPLI</a>
     <a class="navlink" href="#features">PRODUCTS</a>
     <a class="navlink" href="#">ENTERPRISE</a>
@@ -214,26 +214,26 @@ tailwind.config = {
   <div class="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center w-full">
     <!-- copy -->
     <div>
-      <div class="inline-flex items-center gap-2 border border-golden/50 bg-golden/10 text-white text-[11px] tracking-[.3em] uppercase px-4 py-2 rounded-full mb-7">
+      <div class="inline-flex items-center gap-2 border border-golden/50 bg-golden/10 text-dkgrey text-[11px] tracking-[.3em] uppercase px-4 py-2 rounded-full mb-7">
         <span class="w-2 h-2 bg-golden rounded-full animate-ping"></span> <span class="text-golden font-bold">10% OFF</span> — claim your offer now!
       </div>
-      <h1 class="text-white font-extrabold uppercase leading-[1.05] text-4xl sm:text-5xl xl:text-6xl">
+      <h1 class="text-dkgrey font-extrabold uppercase leading-[1.05] text-4xl sm:text-5xl xl:text-6xl">
         <span class="reveal-line"><b>Your Car,</b></span>
         <span class="reveal-line"><b>Fully</b></span>
         <span class="reveal-line"><b class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-golden">Protected.</b></span>
       </h1>
-      <p class="mt-6 text-white/70 max-w-xl text-sm sm:text-base">
+      <p class="mt-6 text-grey max-w-xl text-sm sm:text-base">
         We protect your assets by capitalizing on cutting-edge technology, backed by 24×7 customer services, catering to your needs anytime, anywhere. We protect your assets by capitalizing on cutting-edge technology.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-4">
         <a href="#coverage" class="btn-brand btn-shine text-white font-semibold px-8 py-3.5 rounded-full text-sm">BUY NOW &amp; SAVE 10% →</a>
-        <a href="#coverage" class="border border-white/25 text-white font-medium px-8 py-3.5 rounded-full text-sm hover:bg-white/10 transition">TALK TO US</a>
+        <a href="#coverage" class="border border-dkgrey/30 text-dkgrey font-medium px-8 py-3.5 rounded-full text-sm hover:bg-black/5 transition">TALK TO US</a>
       </div>
-      <p class="mt-5 text-golden text-sm font-semibold flex items-center gap-2">
+      <p class="mt-5 text-[#b9770a] text-sm font-semibold flex items-center gap-2">
         <span class="animate-pulse">⏳</span> Hurry — 10% OFF ends in <span class="countdown font-bold tabular-nums">--:--:--</span>
       </p>
-      <p class="mt-2 text-white/40 text-xs">Terms &amp; Conditions Apply *</p>
+      <p class="mt-2 text-grey text-xs">Terms &amp; Conditions Apply *</p>
     </div>
 
     <!-- car scene -->
@@ -259,8 +259,8 @@ tailwind.config = {
 </header>
 
 <!-- ================= TRUST MARQUEE (text source: scraped Key Features intro) ================= -->
-<section id="trust" class="bg-ink py-5 border-y border-white/10 overflow-hidden">
-  <div class="marquee text-white/60 text-sm font-medium uppercase tracking-widest">
+<section id="trust" class="bg-[#faf7f4] py-5 border-y border-gray-200 overflow-hidden">
+  <div class="marquee text-grey text-sm font-medium uppercase tracking-widest">
     <span>Cutting-edge technology</span><span class="text-brand">■</span>
     <span>24×7 customer services</span><span class="text-golden">■</span>
     <span>Anytime, anywhere</span><span class="text-teal">■</span>
@@ -314,12 +314,46 @@ tailwind.config = {
   </div>
 </section>
 
+<!-- ================= PREMIUM CALCULATOR ================= -->
+<section id="calc" class="py-24 px-6 lg:px-12 bg-white">
+  <div class="max-w-5xl mx-auto sr">
+    <div class="text-center mb-12">
+      <p class="text-brand text-xs tracking-[.3em] uppercase font-semibold">Instant estimate</p>
+      <h2 class="text-4xl font-extrabold uppercase text-dkgrey mt-3">Calculate your premium</h2>
+      <p class="text-grey text-sm mt-4">Slide to your car's market value and pick a plan &mdash; the estimate updates live.</p>
+    </div>
+    <div class="bg-[#faf7f4] rounded-3xl p-8 lg:p-12 grid lg:grid-cols-2 gap-10 border border-gray-100">
+      <div>
+        <label class="text-xs uppercase tracking-wider text-grey font-semibold">Vehicle value &mdash; <span id="valLabel" class="text-brand font-bold">PKR 3,000,000</span></label>
+        <input id="valRange" type="range" min="500000" max="20000000" step="100000" value="3000000" class="w-full mt-3" style="accent-color:#ec7726">
+        <div class="flex justify-between text-[11px] text-grey mt-1"><span>5 Lac</span><span>2 Crore</span></div>
+        <div class="mt-7 flex flex-wrap gap-2" id="rateBtns">
+          <button data-rate="0.0325" class="rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-brand bg-brand text-white transition">COMPREHENSIVE &middot; 3.25%</button>
+          <button data-rate="0.0375" class="rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-gray-200 text-grey hover:border-brand transition">PLATINUM &middot; 3.75%</button>
+          <button data-rate="0.0425" class="rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-gray-200 text-grey hover:border-brand transition">ZERO DEP &middot; 4.25%</button>
+        </div>
+        <p class="text-[11px] text-grey mt-5">* Illustrative estimate only. Final premium is confirmed after vehicle inspection.</p>
+      </div>
+      <div class="bg-gradient-to-br from-ink to-[#2b2e35] rounded-2xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden">
+        <div class="pixels absolute top-4 right-4 opacity-60">
+          <span style="background:#ec7726"></span><span></span><span style="background:#faa61a"></span><span></span><span></span><span style="background:#fbb78f"></span>
+        </div>
+        <p class="text-white/60 text-xs uppercase tracking-[.3em]">Estimated annual premium</p>
+        <p class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand to-golden my-5">PKR <span id="premium">97,500</span></p>
+        <p class="text-white/50 text-xs mb-7">&asymp; PKR <span id="monthly">8,125</span> / month</p>
+        <a href="#coverage" class="btn-brand btn-shine text-white font-semibold px-10 py-3.5 rounded-full text-sm w-full">PROCEED WITH THIS QUOTE</a>
+        <p class="text-white/40 text-[11px] mt-4">No obligation &middot; Free vehicle inspection</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= QUOTE / APP (text source: car-insurance-scraped.md §4 & §5) ================= -->
-<section id="quote" class="relative py-24 px-6 lg:px-12 bg-gradient-to-b from-ink to-[#26282e] text-white overflow-hidden">
+<section id="quote" class="relative py-24 px-6 lg:px-12 bg-[#faf7f4] overflow-hidden">
   <div class="grid-lines"></div>
   <div class="max-w-6xl mx-auto relative">
     <!-- CTA band -->
-    <div class="bg-white rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 sr text-dkgrey mb-16 relative overflow-hidden">
+    <div class="bg-white rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 sr text-dkgrey mb-16 relative overflow-hidden border border-gray-100 shadow-sm">
       <div class="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-golden/15 hidden md:block"></div>
       <div class="relative">
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-5">
@@ -336,8 +370,8 @@ tailwind.config = {
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div class="sr">
         <p class="text-brand text-xs tracking-[.3em] uppercase font-semibold mb-3">TPL Insurance App</p>
-        <h3 class="text-3xl font-extrabold uppercase leading-tight">Manage everything<br>in one place</h3>
-        <p class="text-white/70 text-sm mt-5 max-w-lg">Experience seamless insurance management at your fingertips. With the TPL Insurance App, you can buy and manage policies, make secure premium payments, track claims in real time, and receive instant updates. Enjoy faster support with 24/7 assistance, access exclusive rewards and discounts, and stay in control of all your insurance needs through one smart, intuitive platform.</p>
+        <h3 class="text-3xl font-extrabold uppercase leading-tight text-dkgrey">Manage everything<br>in one place</h3>
+        <p class="text-grey text-sm mt-5 max-w-lg">Experience seamless insurance management at your fingertips. With the TPL Insurance App, you can buy and manage policies, make secure premium payments, track claims in real time, and receive instant updates. Enjoy faster support with 24/7 assistance, access exclusive rewards and discounts, and stay in control of all your insurance needs through one smart, intuitive platform.</p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="#" class="bg-black rounded-lg px-5 py-2.5 flex flex-col leading-tight"><span class="text-[9px] uppercase opacity-70">Get it on</span><span class="font-bold text-sm">Google Play</span></a>
           <a href="#" class="bg-black rounded-lg px-5 py-2.5 flex flex-col leading-tight"><span class="text-[9px] uppercase opacity-70">Download on the</span><span class="font-bold text-sm">App Store</span></a>
@@ -379,14 +413,14 @@ tailwind.config = {
 </section>
 
 <!-- ================= FOOTER (text source: scraped footer) ================= -->
-<footer class="bg-ink text-white/60 pt-16 pb-8 px-6 lg:px-12 text-sm">
+<footer class="bg-[#f5f7f9] text-grey pt-16 pb-8 px-6 lg:px-12 text-sm border-t border-gray-200">
   <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
     <div>
       <span class="inline-block bg-white rounded-md p-1.5 mb-5"><img src="assets/tpl-logo.webp" onerror="this.onerror=null;this.src='https://tplinsurance.com/storage/2023/07/TPL-insurance-logo-updatenew.webp'" alt="TPL Insurance" class="h-8"></span>
       <p class="text-xs leading-relaxed">TPL Insurance is the first insurance company in Pakistan to sell general insurance products directly to the consumer. Since launch in 2005, the company has grown from strength-to-strength, delivering superior and hassle-free Insurance products to individual and corporate clients.</p>
     </div>
     <div>
-      <p class="text-white font-semibold uppercase text-xs tracking-widest mb-4">Resources</p>
+      <p class="text-dkgrey font-semibold uppercase text-xs tracking-widest mb-4">Resources</p>
       <ul class="space-y-2 text-xs">
         <li><a href="#" class="hover:text-brand transition">Media</a></li>
         <li><a href="#" class="hover:text-brand transition">Contact Us</a></li>
@@ -397,24 +431,24 @@ tailwind.config = {
       </ul>
     </div>
     <div>
-      <p class="text-white font-semibold uppercase text-xs tracking-widest mb-4">Locations</p>
+      <p class="text-dkgrey font-semibold uppercase text-xs tracking-widest mb-4">Locations</p>
       <ul class="space-y-2 text-xs"><li>Karachi</li><li>Islamabad</li><li>Lahore</li><li>Multan</li><li>Faisalabad</li><li>Hyderabad</li></ul>
-      <p class="text-white font-semibold uppercase text-xs tracking-widest mt-6 mb-3">Features</p>
+      <p class="text-dkgrey font-semibold uppercase text-xs tracking-widest mt-6 mb-3">Features</p>
       <ul class="space-y-2 text-xs"><li>Fastest Claim</li><li>24/7 Help</li><li>RFP</li></ul>
     </div>
     <div>
-      <p class="text-white font-semibold uppercase text-xs tracking-widest mb-4">Get the App</p>
+      <p class="text-dkgrey font-semibold uppercase text-xs tracking-widest mb-4">Get the App</p>
       <div class="flex flex-col gap-2 mb-5">
         <a href="#" class="bg-black rounded-md px-3 py-1.5 flex flex-col leading-tight text-xs"><span class="text-[8px] uppercase opacity-70">Get it on</span><span class="font-bold">Google Play</span></a>
         <a href="#" class="bg-black rounded-md px-3 py-1.5 flex flex-col leading-tight text-xs"><span class="text-[8px] uppercase opacity-70">Download on the</span><span class="font-bold">App Store</span></a>
       </div>
-      <p class="text-white font-semibold uppercase text-xs tracking-widest mb-3">Any Question? We're Here To Help</p>
+      <p class="text-dkgrey font-semibold uppercase text-xs tracking-widest mb-3">Any Question? We're Here To Help</p>
       <ul class="space-y-2 text-xs"><li><a href="#" class="hover:text-brand transition">Sales</a></li><li><a href="#" class="hover:text-brand transition">Customer Support</a></li><li><a href="#" class="hover:text-brand transition">Claims</a></li><li><a href="#" class="hover:text-brand transition">Agent Support</a></li></ul>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto border-t border-white/10 mt-12 pt-6 flex flex-wrap justify-between gap-4 text-[11px] text-white/40">
+  <div class="max-w-7xl mx-auto border-t border-gray-200 mt-12 pt-6 flex flex-wrap justify-between gap-4 text-[11px] text-grey">
     <div class="space-x-4">
-      <span class="border border-white/20 rounded px-2 py-1">Jama Punji</span>
+      <span class="border border-gray-300 rounded px-2 py-1">Jama Punji</span>
       <a href="#" class="hover:text-brand">Privacy &amp; Policy</a>
       <a href="#" class="hover:text-brand">Quality Policy</a>
       <a href="#" class="hover:text-brand">Sitemap</a>
@@ -618,6 +652,29 @@ document.querySelectorAll('.tilt').forEach(card=>{
   });
   card.addEventListener('mouseleave',()=>card.style.transform='');
 });
+
+/* premium calculator (illustrative sample rates) */
+(function(){
+  const range=document.getElementById('valRange'), valLabel=document.getElementById('valLabel'),
+        premium=document.getElementById('premium'), monthly=document.getElementById('monthly');
+  if(!range) return;
+  let rate=0.0325;
+  const fmt=n=>n.toLocaleString('en-PK');
+  function calc(){
+    const v=+range.value;
+    valLabel.textContent='PKR '+fmt(v);
+    const p=Math.round(v*rate);
+    premium.textContent=fmt(p);
+    monthly.textContent=fmt(Math.round(p/12));
+  }
+  range.addEventListener('input',calc);
+  document.querySelectorAll('.rate-btn').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.rate-btn').forEach(x=>x.className='rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-gray-200 text-grey hover:border-brand transition');
+    b.className='rate-btn px-4 py-2 rounded-full text-xs font-semibold border-2 border-brand bg-brand text-white transition';
+    rate=+b.dataset.rate; calc();
+  }));
+  calc();
+})();
 </script>
 </body>
 </html>
