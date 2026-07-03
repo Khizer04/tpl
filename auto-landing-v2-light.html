@@ -230,9 +230,6 @@ tailwind.config = {
         <a href="#coverage" class="btn-brand btn-shine text-white font-semibold px-8 py-3.5 rounded-full text-sm">BUY NOW &amp; SAVE 10% →</a>
         <a href="#coverage" class="border border-dkgrey/30 text-dkgrey font-medium px-8 py-3.5 rounded-full text-sm hover:bg-black/5 transition">TALK TO US</a>
       </div>
-      <p class="mt-5 text-[#b9770a] text-sm font-semibold flex items-center gap-2">
-        <span class="animate-pulse">⏳</span> Hurry — 10% OFF ends in <span class="countdown font-bold tabular-nums">--:--:--</span>
-      </p>
       <p class="mt-2 text-grey text-xs">Terms &amp; Conditions Apply *</p>
     </div>
 
@@ -326,7 +323,6 @@ tailwind.config = {
           <span class="offer-badge btn-shine inline-block bg-gradient-to-br from-golden to-brand text-white font-extrabold text-3xl lg:text-4xl px-6 py-3 rounded-2xl shadow-lg">10% OFF</span>
           <span class="text-dkgrey font-semibold text-base sm:text-lg uppercase tracking-wide">on your car insurance</span>
         </div>
-        <p class="text-sm font-semibold text-[#b9770a] mb-3 flex items-center gap-2"><span class="animate-pulse">⏳</span> Offer ends in <span class="countdown text-brand font-bold tabular-nums">--:--:--</span></p>
         <h2 class="text-2xl lg:text-3xl font-extrabold uppercase text-brand">Get your vehicle insured now</h2>
         <p class="text-grey text-sm mt-3">Protect your vehicle with TPL Insurance - Pakistan's trusted auto insurance provider since 2005.</p>
       </div>
@@ -347,6 +343,18 @@ tailwind.config = {
         <img src="assets/Mockup.avif" alt="TPL Insurance mobile app screens" class="max-h-[520px] w-auto drop-shadow-2xl" style="animation:carFloat 6s ease-in-out infinite">
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="reviews" class="py-24 px-6 lg:px-12 bg-[#faf7f4]">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 sr">
+      <p class="text-brand text-xs tracking-[.3em] uppercase font-semibold">Testimonials</p>
+      <h2 class="text-4xl font-extrabold uppercase text-dkgrey mt-3">What our customers say</h2>
+      <p class="text-grey text-sm mt-4">Experiences from drivers who trust TPL Insurance with their vehicles.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6" id="reviewGrid"></div>
   </div>
 </section>
 
@@ -425,7 +433,7 @@ tailwind.config = {
 
 <!-- sticky urgency pill -->
 <div id="urgent" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 bg-ink text-white rounded-full shadow-2xl pl-5 pr-2 py-2 border border-white/10">
-  <span class="text-xs">10% OFF ends in <span class="countdown text-golden font-bold tabular-nums">--:--:--</span></span>
+  <span class="text-xs">10% OFF on your car insurance</span>
   <a href="#coverage" class="btn-brand btn-shine text-white text-xs font-semibold px-4 py-2 rounded-full">Buy Now</a>
 </div>
 
@@ -579,20 +587,6 @@ addEventListener('scroll',()=>{
   urgent.classList.toggle('on',s>700);
 },{passive:true});
 
-/* countdown — resets each day to keep the offer live */
-(function countdown(){
-  const els=document.querySelectorAll('.countdown');
-  function tick(){
-    const now=new Date(), end=new Date(now); end.setHours(24,0,0,0);
-    let t=Math.max(0,end-now);
-    const h=String(Math.floor(t/3.6e6)).padStart(2,'0');
-    const m=String(Math.floor(t%3.6e6/6e4)).padStart(2,'0');
-    const s=String(Math.floor(t%6e4/1e3)).padStart(2,'0');
-    const txt=`${h}:${m}:${s}`;
-    els.forEach(e=>e.textContent=txt);
-  }
-  tick(); setInterval(tick,1000);
-})();
 
 /* mouse parallax in hero */
 const scene=document.getElementById('scene');
@@ -618,6 +612,32 @@ document.querySelectorAll('.tilt').forEach(card=>{
   });
   card.addEventListener('mouseleave',()=>card.style.transform='');
 });
+
+/* testimonials (illustrative) */
+const REVIEWS = [
+  ['My claim after a rear-end accident was approved in under two days. The team kept me updated at every step.', 'Ahmed Khan', 'Karachi', 5],
+  ['Buying my car policy was quick and the free tracker gives me real peace of mind on long drives.', 'Fatima Sheikh', 'Lahore', 5],
+  ['Great value for a comprehensive plan. The app makes it easy to see my cover and renew on time.', 'Usman Ali', 'Islamabad', 5],
+  ['When my windscreen cracked, the repair was arranged at a workshop near me with zero hassle.', 'Ayesha Malik', 'Faisalabad', 5],
+  ['24/7 support actually means 24/7 — I called late at night and someone helped me right away.', 'Bilal Ahmed', 'Multan', 4],
+  ['Switched to TPL last year and renewals have been smooth. The whole process feels modern and simple.', 'Sana Riaz', 'Hyderabad', 5],
+];
+const stars = n => '<span class="text-golden">'+'\u2605'.repeat(n)+'</span><span class="text-gray-300">'+'\u2605'.repeat(5-n)+'</span>';
+const initials = name => name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const RPIX = [12,45,33,44,15,47];
+const rg = document.getElementById('reviewGrid');
+if (rg) rg.innerHTML = REVIEWS.map(([quote,name,city,rating],i)=>`
+  <div class="tilt sr bg-white rounded-2xl p-7 border border-gray-100 shadow-sm" style="transition-delay:${(i%3)*.08}s">
+    <div class="text-lg tracking-wide mb-4">${stars(rating)}</div>
+    <p class="text-grey text-sm leading-relaxed">\u201C${quote}\u201D</p>
+    <div class="flex items-center gap-3 mt-6">
+      <img src="https://i.pravatar.cc/120?img=${RPIX[i%RPIX.length]}" alt="${name}" class="w-11 h-11 rounded-full object-cover bg-brand/10" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name='+encodeURIComponent(this.alt)+'&background=ec7726&color=fff'">
+      <div><p class="font-semibold text-dkgrey text-sm">${name}</p><p class="text-xs text-grey">${city}</p></div>
+    </div>
+  </div>`).join('');
+
+/* reveal dynamically-injected testimonial cards */
+(function(){var g=document.getElementById('reviewGrid');if(g&&typeof io!=='undefined'){g.querySelectorAll('.sr').forEach(function(e){io.observe(e);});}})();
 </script>
 </body>
 </html>
