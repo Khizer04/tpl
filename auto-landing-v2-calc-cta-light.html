@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TPL Insurance — Car Insurance</title>
+<link rel="icon" type="image/png" href="assets/favicon.png?v=1783346548">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -268,12 +272,12 @@ tailwind.config = {
 <!-- NAV (source: scraped main nav) -->
 <nav id="nav" class="fixed top-0 inset-x-0 z-50 px-6 lg:px-12 py-4 flex items-center justify-between">
   <a href="#" class="flex items-center gap-3">
-    <span class="bg-white rounded-md p-1.5"><img src="assets/logo.webp" onerror="this.onerror=null;this.src='https://tplinsurance.com/storage/2023/07/TPL-insurance-logo-updatenew.webp'" alt="TPL Insurance" class="h-8 w-auto"></span>
+    <img src="assets/logo.png?v=1783346548" alt="TPL Insurance" class="h-8 w-auto">
   </a>
   <div class="hidden md:flex items-center gap-7 text-sm text-neutral-700 font-medium">
     <a class="navlink" href="#features">FEATURES</a>
-    <a class="navlink" href="#coverage">COVERAGE</a>
     <a class="navlink" href="#calc-quote">CALCULATOR</a>
+    <a class="navlink" href="#coverage">COVERAGE</a>
     <a class="navlink" href="#quote">APP</a>
     <a class="navlink" href="#reviews">REVIEWS</a>
     <a class="navlink" href="#faq">FAQ</a>
@@ -346,7 +350,7 @@ tailwind.config = {
       <div class="speed w-28" style="top:60%; right:58%; animation-delay:.8s"></div>
 
       <!-- car crossing the panel edge -->
-      <img id="car" data-depth="16" src="assets/Car.png" alt="Car Insurance"
+      <img id="car" data-depth="16" src="assets/Car.png?v=1783346548" alt="Car Insurance"
            class="absolute z-10 w-[80%] sm:w-[85%] max-w-[600px] bottom-8 sm:bottom-10 left-0 right-0 mx-auto lg:left-auto lg:right-[-24px] lg:mx-0 lg:bottom-auto lg:top-[28%]"
            onerror="this.onerror=null;this.src='https://tplinsurance.com/storage/2024/09/Car.png'">
 
@@ -443,7 +447,7 @@ tailwind.config = {
             <input required type="tel" placeholder="Your Phone" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none text-sm text-dkgrey placeholder-gray-400 transition">
             <input required type="email" placeholder="Your Email" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none text-sm text-dkgrey placeholder-gray-400 transition">
             <textarea placeholder="Your message (optional)" rows="3" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none text-sm text-dkgrey placeholder-gray-400 resize-y transition"></textarea>
-            <button type="submit" class="btn-brand btn-shine w-full text-white font-semibold py-3.5 rounded-xl text-sm">Submit &amp; Get My Quote</button>
+            <button type="submit" class="btn-brand btn-shine w-full text-white font-semibold py-3.5 rounded-xl text-sm">Unlock My Best Deal</button>
             <p id="autoQuoteMsg" class="hidden text-center text-teal font-semibold text-sm">&#10003; Thanks! Our team will call you shortly with your auto quote.</p>
           </form>
         </div>
@@ -512,7 +516,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="sr-r sr flex justify-center">
-        <img src="assets/Mockup.png" alt="TPL Insurance mobile app screens" class="max-h-[520px] w-auto drop-shadow-2xl" style="animation:carFloat 6s ease-in-out infinite">
+        <img src="assets/Mockup.png?v=1783346548" alt="TPL Insurance mobile app screens" class="max-h-[520px] w-auto drop-shadow-2xl" style="animation:carFloat 6s ease-in-out infinite">
       </div>
     </div>
   </div>
@@ -562,7 +566,7 @@ tailwind.config = {
 <footer class="bg-[#f5f7f9] text-grey pt-16 pb-8 px-6 lg:px-12 text-sm border-t border-gray-200">
   <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
     <div>
-      <span class="inline-block bg-white rounded-md p-1.5 mb-5"><img src="assets/logo.webp" onerror="this.onerror=null;this.src='https://tplinsurance.com/storage/2023/07/TPL-insurance-logo-updatenew.webp'" alt="TPL Insurance" class="h-8"></span>
+      <img src="assets/logo.png?v=1783346548" alt="TPL Insurance" class="h-8 mb-5">
       <p class="text-xs leading-relaxed">TPL Insurance is the first insurance company in Pakistan to sell general insurance products directly to the consumer. Since launch in 2005, the company has grown from strength-to-strength, delivering superior and hassle-free Insurance products to individual and corporate clients.</p>
     </div>
     <div>
@@ -606,7 +610,7 @@ tailwind.config = {
 <!-- sticky urgency pill -->
 <div id="urgent" class="fixed bottom-6 left-6 z-40 hidden sm:flex items-center gap-3 bg-ink text-white rounded-full shadow-2xl pl-5 pr-2 py-2 border border-white/10">
   <span class="text-xs">10% OFF on your car insurance</span>
-  <a href="#calc-quote" class="btn-brand btn-shine text-white text-xs font-semibold px-4 py-2 rounded-full">Buy Now</a>
+  <a href="#calc-quote" class="btn-brand btn-shine text-white text-xs font-semibold px-4 py-2 rounded-full">Claim Now</a>
 </div>
 
 <!-- WhatsApp float -->
@@ -624,11 +628,11 @@ tailwind.config = {
 const FEAT_DESC = 'Protect your car with TPL Comprehensive Car Insurance, offering coverage from minor damages to total loss situations.';
 // Icons stored as SVG files in /assets
 const FEAT_ICONS = [
-  'assets/feature-comprehensive.svg',
-  'assets/feature-zero-depreciation.svg',
-  'assets/feature-secure-t.svg',
-  'assets/feature-2t.svg',
-  'assets/feature-drivepro.svg',
+  'assets/feature-comprehensive.svg?v=1783346548',
+  'assets/feature-zero-depreciation.svg?v=1783346548',
+  'assets/feature-secure-t.svg?v=1783346548',
+  'assets/feature-2t.svg?v=1783346548',
+  'assets/feature-drivepro.svg?v=1783346548',
 ];
 const FEATURES = ['Comprehensive','Zero Depreciation','Secure T','2T','Drive Pro'].map((name,i)=>({
   name, desc:FEAT_DESC, icon:FEAT_ICONS[i]
